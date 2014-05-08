@@ -1,10 +1,5 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
 Chess game with game logic written in Ruby (in the lib/assets/chess folder).
 
 Build on top of rails to use Rails' MVC to deliver views to the browser.
