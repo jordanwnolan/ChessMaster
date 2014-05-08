@@ -18,6 +18,7 @@ gem 'debugger', group: [:development, :test]
 gem 'devise'
 gem 'figaro'
 gem 'pusher'
+gem 'rails_12factor', group: :production
 
 group :development do
   gem 'pry-rails'
