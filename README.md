@@ -2,7 +2,7 @@
 
 Chess game with game logic written in Ruby (in the lib/assets/chess folder).
 
-Build on top of rails to use Rails' MVC to deliver views to the browser.
+Built on top of rails to use Rails' MVC to deliver views to the browser.
 
 UI built using HTML, CSS, Javascript, jQuery, and AJAX.
 
