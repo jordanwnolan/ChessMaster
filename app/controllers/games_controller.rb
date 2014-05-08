@@ -19,7 +19,7 @@ class GamesController < ApplicationController
       board: Board.new,
       player_turn: 1,
       game_name: game_params[:game_name] })
-    # fail
+    
     @turn = "white"
     @game.save
     redirect_to @game
