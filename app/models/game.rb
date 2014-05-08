@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   require 'all_pieces'
 
-  serialize :board
+  serialize :board, Board
   attr_accessor :game_board
 end

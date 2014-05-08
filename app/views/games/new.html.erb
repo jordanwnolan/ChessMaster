@@ -1,0 +1,22 @@
+<h1>Create New Game</h1>
+<form action="<%= games_url %>" method="post">
+  <%= auth_token %>
+  <div class="input">
+  <label for="game_name">Game Name</label>
+    <input id="game_name" type="text" name="game[game_name]" value="">
+  </div>
+
+  <div class="select">
+  <label for="player2">Choose an opponent</label>
+  <select name="game[player_2_id]" id="player2">
+  <option></option>
+  <%= @players.each do |player| %>
+    <option value="<%= player.id %>"><%= player.email %></option>
+  <% end %>
+  </select>
+  </div>
+
+  <div class="submit">
+    <input type="submit" value="Create game">
+  </div>
+</form>

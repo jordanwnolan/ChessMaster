@@ -9,6 +9,7 @@
 <body>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
+<%= button_to('Sign Out', destroy_player_session_url, method: :delete) if player_signed_in? %>
 <%= yield %>
 
 </body>

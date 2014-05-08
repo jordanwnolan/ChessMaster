@@ -1,68 +1,7 @@
-<section id="board-container" class"group" data-game-id="<%= @game.id %>">
-  <%= render partial: 'games/board', locals: { game: @game } %>
-</section>
-
-<script>
-
-  $(document).ready(function(){
-  var fromRow;
-  var toRow;
-  var fromCol;
-  var toCol;
-  var $piece;
-  var $fromTile;
-  var color;
-  var $prevTile;
-  var game_id = $("#board-container").attr("data-game-id");
-
-  function rebind() {
-  color = $(".board").attr("data-current-turn");
-
-  $(".piece." + color).draggable({})
-  $(".piece." + color).addClass("moveable-piece")
-  $( ".tile" ).droppable({
-    hoverClass: "move-tile",
-    accept: '.piece',
-    greedy: true,
-    drop: function( event, ui ) {
-      $(".errors").empty();
-      var $tar = $(event.target)
-
-      toRow = $tar.attr('data-row-id')
-      toCol = $tar.attr('data-col-id')
-
-      $fromTile.html('');
-      $tar.html($piece);
-      $piece.removeAttr("style");
-      $piece.draggable();
-      $.ajax({
-        url: '/games/make_move',
-        type: 'POST',
-        data: { 'game': game_id, 
-        'from': [fromRow, fromCol], 
-        'to': [toRow, toCol], 
-        'color': $piece.attr('data-color'),
-        'turn': color },
-        success: function(data) {
-          $("#board-container").html(data);
-          rebind();
-
-        }
-      })
-    }
-  });
-
-  $("#board-container").on("mousedown", ".piece." + color, function(event) {
-    $piece = $(event.currentTarget);
-    $fromTile = $(event.currentTarget).closest("article");
-    fromRow = $fromTile.attr('data-row-id');
-    fromCol = $fromTile.attr('data-col-id');
-  });
-
-
-  }
-
-
-  rebind();
-  });
-</script>
+<h1>User's games</h1>
+<%= link_to "New Game", new_game_url %>
+<ul>
+<% @games.each do |game| %>
+  <li><a href="<%= game_url(game) %>"><%= game.game_name %></a></li>
+<% end %>
+</ul>
