@@ -1,6 +1,17 @@
+<!-- <section class="errors"> -->
+  <h3 class="errors">
+  <% if @errors %>
+    <% @errors.each do |error| %>
+      <%= error %>
+    <% end %>
+  <% end %>
+  </h3>
+<!-- </section> -->
+<div class="board" data-current-turn="<%= @turn %>">
 <% game.board.grid.reverse.each_with_index do |row, row_idx| %>
   <% row.each_with_index do |tile,col_idx| %>
-    <% css = (col_idx + row_idx).odd? ? "grey" : "white" %>
+  
+    <% css = (col_idx + row_idx).odd? ? "grey-background" : "white-background" %>
       <% (color = tile.color == :white ? 'white' : 'black') unless tile.nil?%>
       <article class="<%= css %> tile" data-row-id='<%= 7 - row_idx %>' data-col-id='<%= col_idx %>'>
       <% if tile %>
@@ -11,3 +22,4 @@
       </article>
   <% end %>
 <% end %>
+</div>

@@ -21,12 +21,25 @@ div, section, article {
   font: inherit;
 }
 
-section {
-  width: 418px;
-  height: 418px;
+.group {
+  content: '';
+  display: block;
+  clear: both;
 }
 
-section article {
+#board-container {
+  width: 800px;
+  margin: auto;
+}
+
+.board {
+  margin: auto;
+  width: 418px;
+  height: 418px;
+  border: 1px solid #000;
+}
+
+.board article {
   font-size: 30px;
   text-align: center;
   vertical-align: middle;
@@ -42,14 +55,36 @@ section > div:nth-child(odd) {
   
 }
 
-.white.tile {
-  background-color: #bb9;
-
+.tile:hover {
+  /*background-color: #f00;*/
 }
-.grey.tile {
+
+.white-background {
+  background-color: #bb9;  
+}
+
+.grey-background {
   background-color: #777;
 }
 
 .piece.white {
   color: #fff;
+}
+
+/*.tile:hover {
+  background-color: #f00;
+}*/
+
+.errors {
+  height: 30px;
+  display: block;
+  text-align: center;
+}
+
+.tile.move-tile {
+  border: 1px solid #0f0;
+}
+
+.moveable-piece:hover {
+  cursor: pointer;
 }
