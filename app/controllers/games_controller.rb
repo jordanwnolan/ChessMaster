@@ -22,13 +22,15 @@ class GamesController < ApplicationController
     # fail
     @turn = "white"
     @game.save
-    render :show
+    redirect_to @game
   end
 
   def show
 
     @game = Game.find(params[:id])
     @turn = @game.player_turn == 1 ? 'white' : 'black'
+    @player1 = Player.find(@game.player_1_id)
+    @player2 = Player.find(@game.player_2_id)
     # render partial: 'games/board', locals: { game: @game }
     render :show
   end
@@ -44,14 +46,18 @@ class GamesController < ApplicationController
       @turn = params[:turn] == 'white' ? 'black' : 'white'
       @game.player_turn = @turn == 'white' ? 1 : 2
       @game.save
-      
+      push_move(@game, @turn)
     rescue Exception => e
       @errors = [e.message]
-      @game = Game.find(params[:game])
+      @game = Game.find(params[:id])
       @turn = params[:turn]
     end
 
-    render partial: 'games/board', locals: { game: @game }
+    if request.xhr?
+      head :created
+    else
+      render partial: 'games/board', locals: { game: @game, turn: @turn, errors: @errors }
+    end
   end
 
   def game_params

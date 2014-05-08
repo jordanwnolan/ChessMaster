@@ -16,6 +16,8 @@ gem 'unicorn'
 gem 'capistrano-rails', group: :development
 gem 'debugger', group: [:development, :test]
 gem 'devise'
+gem 'figaro'
+gem 'pusher'
 
 group :development do
   gem 'pry-rails'

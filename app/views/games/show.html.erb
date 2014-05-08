@@ -1,10 +1,27 @@
-<section id="board-container" class"group" data-game-id="<%= @game.id %>">
-  <%= render partial: 'games/board', locals: { game: @game } %>
-</section>
-
+<div class="game group">
+  <% if @player2 == current_player%>
+    <h3 class="player-name">You are <div class="player-color-info player-black"></div></h3>
+  <% else %>
+    <h3 class="player-name"><%= @player2.email %></h3>
+  <% end %>
+  <section id="board-container" 
+    class="group" 
+    data-game-id="<%= @game.id %>" 
+    data-player-color="<%= @game.player_2_id == current_player.id ? 'black' : 'white' %>">
+    <%= render partial: 'games/board', locals: { game: @game, turn: @turn, errors: @errors } %>
+  </section>
+  <footer>
+  <% if @player1 == current_player%>
+    <h3 class="player-name">You are <div class="player-color-info"></div></h3>
+  <% else %>
+    <h3 class="player-name"><%= @player1.email %></h3>
+  <% end %>
+  </footer>
+</div>
+<script src="http://js.pusher.com/2.2/pusher.min.js"></script>
 <script>
 
-  $(document).ready(function(){
+  $(document).ready(function() {
   var fromRow;
   var toRow;
   var fromCol;
@@ -13,11 +30,12 @@
   var $fromTile;
   var color;
   var $prevTile;
+  var playerColor = $("#board-container").attr("data-player-color");
   var game_id = $("#board-container").attr("data-game-id");
 
   function rebind() {
   color = $(".board").attr("data-current-turn");
-
+  if (color === playerColor) {
   $(".piece." + color).draggable({})
   $(".piece." + color).addClass("moveable-piece")
   $( ".tile" ).droppable({
@@ -43,7 +61,7 @@
         'color': $piece.attr('data-color'),
         'turn': color },
         success: function(data) {
-          $("#board-container").html(data);
+          // $("#board-container").html(data);
           rebind();
 
         }
@@ -58,10 +76,23 @@
     fromCol = $fromTile.attr('data-col-id');
   });
 
-
+  }
   }
 
 
   rebind();
+
+  Pusher.log = function(message) {
+    console.log(message);
+  };
+
+  var pusher = new Pusher("<%= ENV['PUSHER_KEY'] %>");
+
+  var channel = pusher.subscribe("opp-move");
+
+  channel.bind("move", function (data) {
+      $("#board-container").html(data);
+      rebind();
+  });
   });
 </script>

@@ -1,13 +1,13 @@
-<!-- <section class="errors"> -->
+
   <h3 class="errors">
-  <% if @errors %>
-    <% @errors.each do |error| %>
+  <% if errors %>
+    <% errors.each do |error| %>
       <%= error %>
     <% end %>
   <% end %>
   </h3>
-<!-- </section> -->
-<div class="board" data-current-turn="<%= @turn %>">
+<strong>It's <%= turn %>'s turn</strong>
+<div class="board" data-current-turn="<%= turn %>">
 <% game.board.grid.reverse.each_with_index do |row, row_idx| %>
   <% row.each_with_index do |tile,col_idx| %>
   
