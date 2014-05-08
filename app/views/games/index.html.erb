@@ -1,0 +1,58 @@
+<section id="board-container" data-game-id="<%= @game.id %>">
+  <%= render partial: 'games/board', locals: { game: @game } %>
+</section>
+
+<script>
+
+  $(document).ready(function(){
+  var fromRow;
+  var toRow;
+  var fromCol;
+  var toCol;
+  var $piece;
+  var $fromTile;
+
+  function rebind() { 
+  $(".piece").draggable({})
+
+  $( ".tile" ).droppable({
+    accept: '.piece',
+    greedy: true,
+    drop: function( event, ui ) {
+      var $tar = $(event.target)
+      console.log($tar)
+      toRow = $tar.attr('data-row-id')
+      toCol = $tar.attr('data-col-id')
+      console.log(toRow);
+      console.log(toCol);
+      $fromTile.html('');
+      $tar.html($piece);
+      $piece.removeAttr("style")
+      $piece.draggable();
+      $.ajax({
+        url: '/games/make_move',
+        type: 'POST',
+        data: { 'game': $("#board-container").attr("data-game-id"), 
+        'from': [fromRow, fromCol], 
+        'to': [toRow, toCol], 
+        'color': $piece.attr('data-color')},
+        success: function(data) {
+          $("#board-container").html(data);
+          rebind();
+
+        }
+      })
+    }
+  });
+}
+    // $(".tile").draggable( "option", "appendTo", ".tile" );
+
+    $("#board-container").on("mousedown", ".piece", function(event){
+      $piece = $(event.currentTarget)
+      $fromTile = $(event.currentTarget).closest("article");
+      fromRow = $fromTile.attr('data-row-id')
+      fromCol = $fromTile.attr('data-col-id')
+    })
+  rebind();
+  });
+</script>
