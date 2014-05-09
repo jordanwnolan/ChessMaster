@@ -1,7 +1,20 @@
-<h1>User's games</h1>
-<%= link_to "New Game", new_game_url %>
-<ul>
-<% @games.each do |game| %>
-  <li><a href="<%= game_url(game) %>"><%= game.game_name %></a></li>
-<% end %>
-</ul>
+<section class="main-content group">
+
+  <article class="group">
+    <h1>User's games</h1>
+    <ul>
+    <% @games.each do |game| %>
+      <li><a href="<%= game_url(game) %>"><%= game.game_name %></a></li>
+    <% end %>
+    </ul>
+  </article>
+
+  <article class="group">
+    <h1>Watch a Game</h1>
+    <ul>
+    <% @games_to_watch.each do |game| %>
+      <li><a href="<%= game_url(game) %>"><%= game.game_name %></a></li>
+    <% end %>
+    </ul>
+  </article>
+</section>

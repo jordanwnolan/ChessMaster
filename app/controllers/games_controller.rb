@@ -3,6 +3,7 @@ class GamesController < ApplicationController
 
   def index
     @games = current_player.current_games
+    @games_to_watch = Game.all.reject { |game| @games.include?(game) }
   end
 
   def new
@@ -19,7 +20,7 @@ class GamesController < ApplicationController
       board: Board.new,
       player_turn: 1,
       game_name: game_params[:game_name] })
-    
+
     @turn = "white"
     @game.save
     redirect_to @game
@@ -31,6 +32,8 @@ class GamesController < ApplicationController
     @turn = @game.player_turn == 1 ? 'white' : 'black'
     @player1 = Player.find(@game.player_1_id)
     @player2 = Player.find(@game.player_2_id)
+    @observer = (current_player == @player1 || current_player == @player2) ? false : true
+    # fail
     # render partial: 'games/board', locals: { game: @game }
     render :show
   end

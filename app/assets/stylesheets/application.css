@@ -113,3 +113,38 @@ section > div:nth-child(odd) {
 .player-color-info.player-black {
   background: #000;
 }
+
+.signin-form {
+  display: block;
+  width: 400px;
+  height: 400px;
+  margin: auto;
+}
+
+.new_player div {
+  padding: 5px;
+}
+
+.new_player input[type="email"] {
+  width: 300px;
+}
+
+.new_player input[type="password"] {
+  width: 300px;
+}
+
+.main-content {
+  width: 600px;
+  margin: auto;
+}
+
+.main-content > article {
+  display: block;
+  float: left;
+  padding: 20px;
+}
+
+.main-content > a {
+  display: block;
+  float: left;
+}

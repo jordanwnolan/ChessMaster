@@ -9,7 +9,13 @@
 <body>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
+<% if current_player %>
+<p class="current-user">logged in as: <%= current_player.email %></p>
+<% end %>
 <%= button_to('Sign Out', destroy_player_session_url, method: :delete) if player_signed_in? %>
+<%= link_to "Back to Games", games_url %>
+<%= link_to "New Game", new_game_url %>
+
 <%= yield %>
 
 </body>
