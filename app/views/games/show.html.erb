@@ -7,6 +7,7 @@
   <section id="board-container" 
     class="group" 
     data-game-id="<%= @game.id %>" 
+    data-is-observer="<%= !!@observer %>"
     data-player-color="<%= @game.player_2_id == current_player.id ? 'black' : 'white' %>">
     <%= render partial: 'games/board', locals: { game: @game, turn: @turn, errors: @errors } %>
   </section>
@@ -79,8 +80,9 @@
   }
   }
 
-
-  rebind();
+  if ($("#board-is-container").attr("data-observer") == "false") {
+    rebind();
+  }
 
   Pusher.log = function(message) {
     console.log(message);
