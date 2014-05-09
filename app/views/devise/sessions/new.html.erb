@@ -16,4 +16,15 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+<a href="#" id="demo">Sign in with a demo account</a>
 </div>
+
+<script>
+  $("#demo").on("click", function(event){
+      event.preventDefault();
+      console.log("clicked")
+      $("#player_email").val("demo@example.com")
+      $("#player_password").val("12345678")
+
+  })
+</script>
