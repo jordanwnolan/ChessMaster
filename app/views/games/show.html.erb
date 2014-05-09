@@ -62,7 +62,6 @@
         'color': $piece.attr('data-color'),
         'turn': color },
         success: function(data) {
-          // $("#board-container").html(data);
           rebind();
 
         }
@@ -80,7 +79,7 @@
   }
   }
 
-  if ($("#board-is-container").attr("data-observer") == "false") {
+  if ($("#board-container").attr("data-is-observer") == "false") {
     rebind();
   }
 
