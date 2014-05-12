@@ -1,9 +1,9 @@
-###Description###
+##Description##
 
 Chess game with game logic written in Ruby (in the lib/assets/chess folder).
 
 
-##Technologies Used##
+###Technologies Used###
 
 Ruby, Ruby on Rails, HTML, CSS, Javascript, jQuery, AJAX, and Pusher
 
@@ -14,7 +14,7 @@ UI built using HTML, CSS, Javascript, jQuery, and AJAX.  Board is entirely done 
 
 Users can play against one another!  Uses pusher to provide realtime updates of the current game board. When the opponent makes a move, the board automatically updates thanks to Pusher.
 
-##Future Features##
+###Future Features###
 
 Add castling logic.
 
