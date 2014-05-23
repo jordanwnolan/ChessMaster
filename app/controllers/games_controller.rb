@@ -27,6 +27,7 @@ class GamesController < ApplicationController
   end
 
   def show
+    # fail
 
     @game = Game.find(params[:id])
     @turn = @game.player_turn == 1 ? 'white' : 'black'
@@ -44,6 +45,7 @@ class GamesController < ApplicationController
     color = params[:color] == 'white' ? :white : :black
     from_pos = params[:from].map(&:to_i)
     to_pos = params[:to].map(&:to_i);
+    # fail
     begin
       @game.board.move(from_pos, to_pos, color)
       @turn = params[:turn] == 'white' ? 'black' : 'white'
@@ -51,16 +53,17 @@ class GamesController < ApplicationController
       @game.save
       push_move(@game, @turn)
     rescue Exception => e
+      # fail
       @errors = [e.message]
       @game = Game.find(params[:id])
       @turn = params[:turn]
     end
 
-    if request.xhr?
-      head :created
-    else
+    # if request.xhr?
+    #   head :created
+    # else
       render partial: 'games/board', locals: { game: @game, turn: @turn, errors: @errors }
-    end
+    # end
   end
 
   def game_params

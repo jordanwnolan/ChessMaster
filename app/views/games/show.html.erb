@@ -62,6 +62,8 @@
         'color': $piece.attr('data-color'),
         'turn': color },
         success: function(data) {
+          console.log(data)
+          $("#board-container").html(data);
           rebind();
 
         }
@@ -84,7 +86,7 @@
   }
 
   Pusher.log = function(message) {
-    console.log(message);
+    // console.log(message);
   };
 
   var pusher = new Pusher("<%= ENV['PUSHER_KEY'] %>");
@@ -92,8 +94,9 @@
   var channel = pusher.subscribe("opp-move");
 
   channel.bind("move", function (data) {
-      $("#board-container").html(data);
-      rebind();
+    $("#board-container").html(data);
+    rebind();
   });
+  
   });
 </script>
